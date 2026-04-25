@@ -5,6 +5,7 @@ import pl.edu.vistula.task_2.Product.api.request.ProductRequest;
 import pl.edu.vistula.task_2.Product.api.response.ProductResponse;
 import pl.edu.vistula.task_2.Product.domain.Product;
 import pl.edu.vistula.task_2.Product.repository.ProductRepository;
+import pl.edu.vistula.task_2.Product.support.ProductExceptionSupplier;
 import pl.edu.vistula.task_2.Product.support.ProductMapper;
 
 @Service
@@ -20,7 +21,7 @@ public class ProductService {
         return productMapper.toProductResponse(product);
     }
     public ProductResponse find(Long id){
-        Product product = productRepository.findById(id).orElseThrow(RuntimeException::new);
+        Product product = productRepository.findById(id).orElseThrow(ProductExceptionSupplier.productNotFound(id));
         return productMapper.toProductResponse(product);
     }
 }

@@ -8,6 +8,8 @@ import pl.edu.vistula.task_2.Product.api.request.UpdateProductRequest;
 import pl.edu.vistula.task_2.Product.api.response.ProductResponse;
 import pl.edu.vistula.task_2.Product.service.ProductService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/v1/products")
 public class ProductController {
@@ -31,5 +33,15 @@ public class ProductController {
     public ResponseEntity<ProductResponse> update(@PathVariable Long id, @RequestBody UpdateProductRequest updateProductRequest){
         ProductResponse productResponse  = productService.update(id,updateProductRequest);
         return ResponseEntity.status(HttpStatus.OK).body(productResponse);
+    }
+    @GetMapping
+    public ResponseEntity<List<ProductResponse>> findAll(){
+        List<ProductResponse> productResponses = productService.findall();
+        return ResponseEntity.status(HttpStatus.OK).body(productResponses);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ProductResponse> delete(@PathVariable Long id){
+        productService.delete(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

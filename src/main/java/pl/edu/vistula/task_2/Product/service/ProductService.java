@@ -2,6 +2,7 @@ package pl.edu.vistula.task_2.Product.service;
 
 import org.springframework.stereotype.Service;
 import pl.edu.vistula.task_2.Product.api.request.ProductRequest;
+import pl.edu.vistula.task_2.Product.api.request.UpdateProductRequest;
 import pl.edu.vistula.task_2.Product.api.response.ProductResponse;
 import pl.edu.vistula.task_2.Product.domain.Product;
 import pl.edu.vistula.task_2.Product.repository.ProductRepository;
@@ -22,6 +23,11 @@ public class ProductService {
     }
     public ProductResponse find(Long id){
         Product product = productRepository.findById(id).orElseThrow(ProductExceptionSupplier.productNotFound(id));
+        return productMapper.toProductResponse(product);
+    }
+    public ProductResponse update(Long id, UpdateProductRequest updateProductRequest){
+        Product product = productRepository.findById(id).orElseThrow(ProductExceptionSupplier.productNotFound(id));
+        productRepository.save(productMapper.toProduct(product,updateProductRequest));
         return productMapper.toProductResponse(product);
     }
 }

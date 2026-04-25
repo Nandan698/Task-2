@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.vistula.task_2.Product.api.request.ProductRequest;
+import pl.edu.vistula.task_2.Product.api.request.UpdateProductRequest;
 import pl.edu.vistula.task_2.Product.api.response.ProductResponse;
 import pl.edu.vistula.task_2.Product.service.ProductService;
 
@@ -24,6 +25,11 @@ public class ProductController {
     @GetMapping("/{id}")
     public ResponseEntity<ProductResponse> find(@PathVariable Long id){
         ProductResponse productResponse = productService.find(id);
+        return ResponseEntity.status(HttpStatus.OK).body(productResponse);
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductResponse> update(@PathVariable Long id, @RequestBody UpdateProductRequest updateProductRequest){
+        ProductResponse productResponse  = productService.update(id,updateProductRequest);
         return ResponseEntity.status(HttpStatus.OK).body(productResponse);
     }
 }

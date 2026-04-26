@@ -4,8 +4,6 @@ This is a REST API that can create, read, update and delete products, with Sprin
 
 ## Endpoints
 
----
-
 ### Adding a new Product
 
 ``POST  - http://localhost:8080/api/v1/products
@@ -18,7 +16,7 @@ This is a REST API that can create, read, update and delete products, with Sprin
 - With 201 Created status
 
 ![Post.png](img/Controller/Post.png)
-- `@PostMapping` Create method listen to Post request
+- `@PostMapping` Telling this `create` method listen to Post request
 - `@RequestBody` Reads the JSON from Postman here 
 - The request is then passed to the `create` in service
 - Returns the response with created status 
@@ -53,11 +51,32 @@ return entity;
 - If it doesnt have an id then a new id is generated and assigned
 
 ---
+### Getting a Product by its ID
 
 ``GET http://localhost:8080/api/v1/products/1
-``![Screenshot 2026-04-25 143119.png](img/Screenshot%202026-04-25%20143119.png)
-- Client can request to get the data of a product just from the id here
+``
 
+![GetById.png](img/GetById.png)
+- Client can request to get the data of a product just from the id here
+- The system returns the product with its id and name back with 200 Ok Status
+
+![GetById.png](img/Controller/GetById.png)
+- `@GetMapping` listens to GET request from /{id} URl
+- `@PathVariable` grabs the number at the url to `long id`
+- id is then send to the `find` method in service and the return response is stored 
+- Returns the response with Http status 200 and puts the response in the body
+
+![find.png](img/Service/find.png)
+- The id is then send to the `findById` method in the repository 
+- And the product is then transformed into a response and returned
+- if the is not valid not found a new `productNotFound` exception is raised
+
+```
+public Optional<Product> findById(Long id){
+    return Optional.ofNullable(map.get(id));
+}
+```
+- Takes an id number and Returns an Optional that may or may not contain a Product
 
 ---
 

@@ -6,7 +6,7 @@ This is a REST API that can create, read, update and delete products, with Sprin
 
 ### Adding a new Product
 
-``POST  - http://localhost:8080/api/v1/products
+``POST - http://localhost:8080/api/v1/products
 ``
 
 ![PostAdding.png](img/PostAdding.png)
@@ -53,7 +53,7 @@ return entity;
 ---
 ### Getting a Product by its ID
 
-``GET http://localhost:8080/api/v1/products/1
+``GET - http://localhost:8080/api/v1/products/1
 ``
 
 ![GetById.png](img/GetById.png)
@@ -80,7 +80,7 @@ public Optional<Product> findById(Long id){
 
 ---
 ### Get all items from the Database
-``GET http://localhost:8080/api/v1/products
+``GET - http://localhost:8080/api/v1/products
 ``
 
 ![GetAll.png](img/GetAll.png)
@@ -99,8 +99,27 @@ public Optional<Product> findById(Long id){
 - And then `collect` Collects all of them into a list 
 - The list is then Returned
 
-``PUT http://localhost:8080/api/v1/products/1
-``![Screenshot 2026-04-25 143307.png](img/Screenshot%202026-04-25%20143307.png)
+---
+### Update an item using its ID
+``PUT - http://localhost:8080/api/v1/products/1
+``
+
+![PutUpdate.png](img/PutUpdate.png)
+- The Client can change the id and name of a product in the database
+- Returns the updated product with 200 ok status
+
+![Put.png](img/Controller/Put.png)
+- `@PutMapping` listens to PUT request from /{id} URL
+- `@Pathvariable` id is taken from the url
+- Name and id as UpdateProductRequest is then taken from the Body
+- The request is then send into the update method in service
+- The updated product is returned as a response and stored
+- The response  is then returned
+
+![update.png](img/Service/update.png)
+- The Product is taken in from the repository 
+- If found then the `save` method from the repository is initiated to save it again with the update values
+- The updated product is then transformed into a reponse and returned
 
 ``DELETE http://localhost:8080/api/v1/products/1
 ``![Screenshot 2026-04-25 143400.png](img/Screenshot%202026-04-25%20143400.png)

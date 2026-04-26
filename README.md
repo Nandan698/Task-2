@@ -155,11 +155,6 @@ When the client requests for a product that doesnt exist the application handles
 - `ProductExceptionAdvisor`  - Catches the exception and send the response to the client. When no product is found Status 404 Not Found with a Json message saying the "Product with id 99 not found" is send
 
 ---
-
-##Swagger UI
-![Swagger.png](img/Swagger.png)
-
----
 >How the Database work without having anything in the Repository class?
 
 The Repository class extend JpaRepository Which already have these methods in it for the database

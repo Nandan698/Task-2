@@ -121,5 +121,26 @@ public Optional<Product> findById(Long id){
 - If found then the `save` method from the repository is initiated to save it again with the update values
 - The updated product is then transformed into a reponse and returned
 
+---
+### Delete an item 
 ``DELETE http://localhost:8080/api/v1/products/1
-``![Screenshot 2026-04-25 143400.png](img/Screenshot%202026-04-25%20143400.png)
+``
+
+![Delete.png](img/Delete.png)
+- The Client can Delete an item from the Database with its ID
+- Returns 204 No content
+
+![Delete.png](img/Controller/Delete.png)
+- `@DeleteMapping` listens to DELETE request from /{id} URL
+- `@Pathvariable` id is taken from the url
+- `delete` method in service is initiated
+- Only returns the status and an empty build
+
+![delete.png](img/Service/delete.png)
+```
+public void deleteById(Long id){
+    map.remove(id);
+}
+```
+- The Product is taken from the DB using `findByID`
+- Then `deleteById` deletes the product using `map.remove()`

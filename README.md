@@ -79,9 +79,25 @@ public Optional<Product> findById(Long id){
 - Takes an id number and Returns an Optional that may or may not contain a Product
 
 ---
-
+### Get all items from the Database
 ``GET http://localhost:8080/api/v1/products
-``![Screenshot 2026-04-25 143340.png](img/Screenshot%202026-04-25%20143340.png)
+``
+
+![GetAll.png](img/GetAll.png)
+
+- Returns al the Products in the database with their name and id
+- with 200 ok Status
+
+![GetAll.png](img/Controller/GetAll.png)
+- `@GetMapping` Mapped to the base of the URL
+- `findAll` method is initated the Response list is saved
+- Returned the response list in the Response body and status Ok
+
+![findall.png](img/Service/findall.png)
+- Once `findAll` is initiated it steams through the Db and returns the product
+- Every product is then transformed into a response using `map`
+- And then `collect` Collects all of them into a list 
+- The list is then Returned
 
 ``PUT http://localhost:8080/api/v1/products/1
 ``![Screenshot 2026-04-25 143307.png](img/Screenshot%202026-04-25%20143307.png)

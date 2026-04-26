@@ -144,3 +144,17 @@ public void deleteById(Long id){
 ```
 - The Product is taken from the DB using `findByID`
 - Then `deleteById` deletes the product using `map.remove()`
+
+---
+## Exception Handling
+
+When the client requests for a product that doesnt exist the application handles that using the help of 3 Classes
+
+- `ProductNotFoundException` - custom Exception extends RuntimeException. It takes the product id and returns a error message with it
+- `ProductExceptionSupplier` - Creates a new excpetion whenever its needed 
+- `ProductExceptionAdvisor`  - Catches the exception and send the response to the client. When no product is found Status 404 Not Found with a Json message saying the "Product with id 99 not found" is send
+
+---
+>How the Database work without having anything in the Repository class?
+
+The Repository class extend JpaRepository Which already have these methods in it for the database
